@@ -11,16 +11,16 @@ $st_check=$con->prepare("SELECT * FROM users WHERE mobile=?");
 $st_check->bind_param("s",$_GET["mobile"]);
 $st_check->execute();
 $rs=$st_check->get_result();
-if ($rs->num_rows==0)
+if ($rs->num_rows==0) //zero means,no such user with same mobile number
 {
 $st=$con->prepare("INSERT INTO users VALUES (?,?,?,?)");
 $st->bind_param("ssss",$_GET["mobile"],$_GET["password"],$_GET["name"],$_GET["address"]);
 $st->execute();
-echo "Added user sucessfully";
+echo "1"; //User added
 
 }
 
 else
-    echo "Mobile number already exists";
+    echo "0"; //Mobile number already exists
 
 ?>
